@@ -51,14 +51,14 @@ namespace Task_1_week_1
             }
         }
 
-        public static char GetOperationFromUser(char[] operations)
+        public static char GetOperationFromUser()
         {
             while (true)
             {
                 try
                 {
                     string input = GetInputFromUser("Выберите операцию:");
-                    return ValidateAndParseOperation(input,operations);
+                    return ValidateAndParseOperation(input);
                 }
                 catch (Exception ex)
                 {
@@ -67,8 +67,9 @@ namespace Task_1_week_1
             }
         }
 
-        private static char ValidateAndParseOperation(string input, char[] operations)
+        private static char ValidateAndParseOperation(string input)
         {
+            char[] operations = Calculator.GetAvailableOperationSymbols();
             if (input.Length != 1)
             {
                 throw new ArgumentException("Ошибка: Введите ровно один символ операции.");
