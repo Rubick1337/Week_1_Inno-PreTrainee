@@ -51,14 +51,14 @@ namespace Task_1_week_1
             }
         }
 
-        public static char GetOperationFromUser()
+        public static char GetOperationFromUser(char[] operations)
         {
             while (true)
             {
                 try
                 {
                     string input = GetInputFromUser("Выберите операцию:");
-                    return ValidateAndParseOperation(input);
+                    return ValidateAndParseOperation(input,operations);
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +67,7 @@ namespace Task_1_week_1
             }
         }
 
-        private static char ValidateAndParseOperation(string input)
+        private static char ValidateAndParseOperation(string input, char[] operations)
         {
             if (input.Length != 1)
             {
@@ -75,7 +75,7 @@ namespace Task_1_week_1
             }
 
             char operation = input[0];
-            if (operation == '+' || operation == '-' || operation == '*' || operation == '/')
+            if (Array.Exists(operations,op => op == operation))
             {
                 return operation;
             }

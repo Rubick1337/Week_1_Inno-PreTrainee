@@ -30,6 +30,10 @@ namespace Task_1_week_1
                 }
                 throw new ArgumentException($"Неподдерживаемая операция: '{symbol}'");
             }
+        public static char[] GetAvailableOperationSymbols()
+        {
+            return operationMap.Keys.ToArray();
+        }
         private static string GetOperationDescription(Operation operation)
         {
             switch (operation)
@@ -118,6 +122,7 @@ namespace Task_1_week_1
                 return false;
             }
         }
+
         public static void DisplayCalculationResult(double a, double b, char operation, double result)
         {
             Console.WriteLine($"\nРезультат: {a} {operation} {b} = {result}");
