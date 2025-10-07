@@ -22,7 +22,7 @@ namespace Task_1_week_1
             {'*',Operation.Multiply},
             {'/', Operation.Divide },
         };
-            private static Operation GetOperationFromSymbol(char symbol)
+            public static Operation GetOperationFromSymbol(char symbol)
             {
                 if (operationMap.TryGetValue(symbol, out Operation operation))
                 {
@@ -33,40 +33,6 @@ namespace Task_1_week_1
         public static char[] GetAvailableOperationSymbols()
         {
             return operationMap.Keys.ToArray();
-        }
-        private static string GetOperationDescription(Operation operation)
-        {
-            switch (operation)
-            {
-                case Operation.Add:
-                    {
-                        return "Сложение";
-                    }
-                case Operation.Subtract:
-                    {
-                        return "Вычитание";
-                    }
-                case Operation.Multiply:
-                    {
-                        return "Умножение";
-                    }
-                case Operation.Divide:
-                    {
-                        return "Деление";
-                    }
-                default:
-                    {
-                        return "Не поддерживаемая операция";
-                    }
-            }
-        }
-        public static void PrintAvailableOperations()
-        {
-            Console.WriteLine("Доступные операции");
-            foreach (var operation in operationMap)
-            {
-                Console.WriteLine($"{operation.Key} - {GetOperationDescription(operation.Value)}");
-            }
         }
 
         private static double Add(double a , double b)
@@ -109,23 +75,6 @@ namespace Task_1_week_1
                 default:
                     throw new InvalidOperationException($"Ошибка: Операция '{operation}' не поддерживается.");
             }
-        }
-        public static bool AskToContinue()
-        {
-            Console.WriteLine("Хотите выполнить еще операцию? Нажмите enter для продолжения или любую другую клавишу для выхода");
-            if (Console.ReadKey().Key == ConsoleKey.Enter)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static void DisplayCalculationResult(double a, double b, char operation, double result)
-        {
-            Console.WriteLine($"\nРезультат: {a} {operation} {b} = {result}");
         }
     }
 }
