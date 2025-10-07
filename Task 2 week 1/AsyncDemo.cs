@@ -9,21 +9,15 @@ class Program
     static string ProcessDataSynchronous(string dataName)
     {
         Thread.Sleep(3000);
-        string result = $"Обработка '{dataName}' завершена за 3 секунды";
-        return result;
+        return $"Обработка '{dataName}' завершена за 3 секунды";
     }
     static async Task<string> ProcessDataAsync(string dataName)
     {
         await Task.Delay(3000).ConfigureAwait(false);
-        string result = $"Обработка '{dataName}' завершена за 3 секунды (async)";
-        return result ;
+        return $"Обработка '{dataName}' завершена за 3 секунды (async)";
     }
-    
-    static async Task Main(string[] args)
+    static void RunSynchronusOperations()
     {
-        Console.WriteLine("Cихронная обработка");
-        var stopWatch = Stopwatch.StartNew();
-
         string resultTaskSynchronous1 = ProcessDataSynchronous("data1");
         Console.WriteLine(resultTaskSynchronous1);
 
@@ -32,13 +26,9 @@ class Program
 
         string resultTaskSynchronous3 = ProcessDataSynchronous("data3");
         Console.WriteLine(resultTaskSynchronous3);
-
-        stopWatch.Stop();
-        Console.WriteLine($"Общее время: {stopWatch.Elapsed.TotalSeconds} сек");
-
-        Console.WriteLine("Асихронная обработка");
-        stopWatch.Restart();
-
+    }
+    static async Task RunAsyncOperations()
+    {
         Task<string> resultTaskAsync1 = ProcessDataAsync("data1");
 
         Task<string> resultTaskAsync2 = ProcessDataAsync("data2");
@@ -53,6 +43,22 @@ class Program
             tasks.Remove(completedTask);
             Console.WriteLine(completedTask.Result);
         }
+    }
+    
+    static async Task Main(string[] args)
+    {
+        Console.WriteLine("Cихронная обработка");
+        var stopWatch = Stopwatch.StartNew();
+
+        RunSynchronusOperations();
+
+        stopWatch.Stop();
+        Console.WriteLine($"Общее время: {stopWatch.Elapsed.TotalSeconds} сек");
+
+        Console.WriteLine("Асихронная обработка");
+        stopWatch.Restart();
+
+       await RunAsyncOperations();
 
         stopWatch.Stop();
 
